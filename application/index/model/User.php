@@ -9,7 +9,7 @@ class User extends Model{
 	public function registeruser($username,$password,$tel,$yzm)
 	{
 		$data = ['username'=>"$username", 'pass'=>"$password", 'tel'=>"$tel"];
-		$insertRes = Db::name('user')->insert($data);
+		$insertRes = Db::table('xiaomi_user')->insert($data);
 
 		if( $insertRes == 1){
 			return json(['code' => 1, 'data' => "login", 'msg' => '注册成功！']);
@@ -26,9 +26,9 @@ class User extends Model{
 			'pass' => ['eq',"$password"]
 		];
 
-		$loginUser = Db::name('user')->where($where)->select();
-
-		if($loginUser != ''){
+		$loginUser = Db::table('xiaomi_user')->where($where)->find();
+		
+		if($loginUser == true){
 			session('username', $username);
 			session('login_time',date('Y-m-d',time()));    //登录时间  年月日
 			return json(['code' => '1' , 'data' => '../index/index','msg' => '登录成功！']);

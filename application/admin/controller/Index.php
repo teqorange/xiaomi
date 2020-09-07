@@ -56,4 +56,9 @@ class Index extends Base{
         $m=Db::table('xiaomi_type')->field('id,pid,name')->select();
         echo json_encode($m);
     }
+
+    public function cpview()
+    {
+        return $this->fetch('./fl/picture-list');
+    }
 }

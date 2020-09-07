@@ -52,16 +52,16 @@ class Type extends Controller{
 			}
 		}
 
-		if($pid == -1){
+		if($pid == 1){
 			$where = [
 				'pid' => ['eq',$pid]
 			];
 			$m = Db::table('xiaomi_type')->where($where)->order('id','desc')->find();
 			$number = $m['path']+0.1;
-			if($number == 1 || $number == 2 || $number == 3 $number == 4 || $number == 5 || $number == 6 || $number == 7 || $number == 8 || $number == 9 || $number == 10){
+			if($number == 1 || $number == 2 || $number == 3 || $number == 4 || $number == 5 || $number == 6 || $number == 7 || $number == 8 || $number == 9 || $number == 10){
 				$number = '1.0';
 			}
-			dump($number);
+		
 			$insert = [
 				'name' => $flname,
 				'pid' => $pid,
@@ -75,6 +75,30 @@ class Type extends Controller{
 			}else{
 				return json(['code'=>'-1','data'=>'','msg'=>'添加失败！']);
 			}
+		}
+	}
+
+	public function typed()
+	{
+		$params = input('param.');
+		$where = [
+			'pid' => ['eq',$params['id']]
+		];
+		$db = Db::table('xiaomi_type')->where($where)->select();
+		$pidNum = count($db);
+
+		if($pidNum == 0){
+			$where2 =[
+				'id' => ['eq',$params['id']]
+			];
+			$dbd = Db::table('xiaomi_type')->where($where2)->delete();
+			if($dbd){
+				return json(['code'=>'1','data'=>'','msg'=>'删除成功！']);
+			}else{
+				return json(['code'=>'-1','data'=>'','msg'=>'删除失败！']);
+			}
+		}else{
+			return json(['code'=>'-1','data'=>'','msg'=>'删除失败！还有下级分类不能删除，请先删除下级']);
 		}
 	}
 }

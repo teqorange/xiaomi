@@ -6,10 +6,10 @@
 			<div>
 				<span style="color:red;">*</span>分类名称
 				<div>
-					<input type="input" name="flname" />
+					<input type="input" name="flname" id="flname />
 				</div>
 			</div>
-			<span class="select-box">备注<br />
+			<span class="select-box"><br /><Br />备注
 	      	<select class="select" size="1" name="pid">
 		        <option value="0" selected>顶级分类</option>
 		        {foreach $data as $vo}
@@ -23,16 +23,22 @@
 	<script src="__JS__/jquery.min.js"></script>
 	<script>
 		$("#tj").click(function (){
-			var form = $('#form').serialize();
+			var flname = $("#flname").val();
+			console.log(flname);
+			if(flname != ''){
+				var form = $('#form').serialize();
 
-			$.ajax({
-				url:"{:url('/admin/Type/intype')}",
-				type:'POST',
-				data:form,
-				success:function(data){
-					console.log(data.msg);
-				}
-			});
+				$.ajax({
+					url:"{:url('/admin/Type/intype')}",
+					type:'POST',
+					data:form,
+					success:function(data){
+						console.log(data.msg);
+					}
+				});
+			}else{
+				alert('分类名称不能为空！');
+			}
 		});
 	</script>
 </html>

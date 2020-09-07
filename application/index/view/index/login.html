@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
         <meta name="author" content="order by dede58.com"/>
 		<title>会员登录</title>
-		<link rel="stylesheet" type="text/css" href="__CSS__/login.css">
+		<link rel="stylesheet" type="text/css" href="__ICSS__/login.css">
 		
 	</head>
 	<body>
@@ -34,7 +34,7 @@ onclick="javascript:this.src='{:captcha_src()}?rand='+Math.random()" ></div>
 					</div>
 				</div>
 				<div class="login_submit">
-					<input class="submit" type="button" name="submit" value="立即登录" >
+					<input id="dl" class="submit" type="button" name="submit" value="立即登录" >
 					<div id="content">
 					</div>
 				</div>
@@ -48,9 +48,9 @@ onclick="javascript:this.src='{:captcha_src()}?rand='+Math.random()" ></div>
 
 		</footer>
 	</body>
-	<script src="__JS__/jquery.js"></script>
+	<script src="__IJS__/jquery.js"></script>
 	<script>
-		$('.submit').click(function (){
+		$('#dl').click(function (){
 			var form = $('#form').serialize();
 
 			$.ajax({
